@@ -1,0 +1,25 @@
+AVR basics - Reading and Writing GPIO pins
+https://mansfield-devine.com/speculatrix/2017/04/avr-basics-reading-and-writing-gpio-pins/
+
+## output
+DDRB |= (1 << DDB3);     // set pin 3 of Port B as output
+
+PORTB |= (1 << PB3);     // set pin 3 of Port B high
+PORTB &= ~(1 << PB3);    // set pin 3 of Port B low
+PORTB |= (1 << PORTB3);  // set pin 3 high again
+
+PORTB ^= (1 << PB3);   // toggles the state of the bit
+
+## input
+DDRB &= ~(1 << PINB4);     // set pin 4 of Port B as input
+
+PINB & (1 << PINB4); 	  //To find out if pin 4 is high or low
+
+
+
+
+if ( (PINB & (1 << PINB4)) == (1 << PINB4) ) {
+    // pin is high
+} else {
+    // pin is low
+}
