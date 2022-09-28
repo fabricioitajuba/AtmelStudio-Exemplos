@@ -1,0 +1,23 @@
+<circuit version="1.0.0" rev="1130" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
+
+<item itemtype="Hd44780" CircId="Hd44780-2" mainComp="false" Show_id="true" Show_Val="false" Pos="828,512" rotation="0" hflip="1" vflip="1" label="Hd44780-2" idLabPos="70,-82" labelrot="0" valLabPos="-16,20" valLabRot="0" Rows="2 _Rows" Cols="16 _Columns" />
+
+<item itemtype="Ground" CircId="Ground-5" mainComp="false" Show_id="false" Show_Val="false" Pos="824,560" rotation="0" hflip="1" vflip="1" label="Ground-5" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+
+<item itemtype="MCU" CircId="mega328-14" mainComp="false" Show_id="true" Show_Val="false" Pos="956,564" rotation="0" hflip="1" vflip="1" label="mega328-14" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Program="Ex03 - LCD2/Debug/Ex03 - LCD2.hex" Auto_Load="false" Rst_enabled="false" Ext_Osc="false" Wdt_enabled="false" />
+
+<item itemtype="Connector" uid="connector-15" startpinid="Ground-5-Gnd" endpinid="Hd44780-2-PinRW" pointList="824,544,824,532,852,532,852,520" />
+
+<item itemtype="Connector" uid="connector-16" startpinid="mega328-14-PORTD5" endpinid="Hd44780-2-dataPin4" pointList="948,652,900,652,900,520" />
+
+<item itemtype="Connector" uid="connector-17" startpinid="mega328-14-PORTD4" endpinid="Hd44780-2-dataPin5" pointList="948,612,908,612,908,520" />
+
+<item itemtype="Connector" uid="connector-18" startpinid="Hd44780-2-dataPin6" endpinid="mega328-14-PORTD3" pointList="916,520,916,604,948,604" />
+
+<item itemtype="Connector" uid="connector-19" startpinid="Hd44780-2-dataPin7" endpinid="mega328-14-PORTD2" pointList="924,520,924,596,948,596" />
+
+<item itemtype="Connector" uid="connector-20" startpinid="Hd44780-2-PinRS" endpinid="mega328-14-PORTD7" pointList="844,520,844,668,948,668" />
+
+<item itemtype="Connector" uid="connector-21" startpinid="Hd44780-2-PinEn" endpinid="mega328-14-PORTD6" pointList="860,520,860,660,948,660" />
+
+</circuit>
