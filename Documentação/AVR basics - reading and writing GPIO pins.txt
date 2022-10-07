@@ -16,6 +16,19 @@ DDRB &= ~(1 << PINB4);     // set pin 4 of Port B as input
 PINB & (1 << PINB4); 	  //To find out if pin 4 is high or low
 
 
+##################################################
+
+DDRB |= (1 << DDB5); 	//B5 output
+DDRD &= ~(1 << PIND0);	//D0 input
+
+if((PIND & (1 << PIND0)) == 1){
+	PORTB |= (1 << PB5);	//B5=1
+}
+else{
+	PORTB &= ~(1 << PB5);	//B5=0
+}
+
+##################################################
 
 
 if ( (PINB & (1 << PINB4)) == (1 << PINB4) ) {
@@ -23,3 +36,11 @@ if ( (PINB & (1 << PINB4)) == (1 << PINB4) ) {
 } else {
     // pin is low
 }
+
+
+
+#define LEDPORT  PORTA
+#define LEDPIN   1<<PA3
+
+LEDPORT |= LEDPIN;      //set LEDPIN
+LEDPORT &= ~LEDPIN;   //clear LEDPIN
