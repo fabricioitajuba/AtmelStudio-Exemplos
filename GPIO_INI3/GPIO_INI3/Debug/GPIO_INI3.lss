@@ -1,0 +1,1198 @@
+
+GPIO_INI3.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  00000780  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000072c  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000780  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000007b0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000050  00000000  00000000  000007f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000848  00000000  00000000  00000840  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000006ae  00000000  00000000  00001088  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000007d4  00000000  00000000  00001736  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000068  00000000  00000000  00001f0c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000385  00000000  00000000  00001f74  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000b58  00000000  00000000  000022f9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000030  00000000  00000000  00002e51  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 74 03 	call	0x6e8	; 0x6e8 <main>
+  78:	0c 94 94 03 	jmp	0x728	; 0x728 <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <pinMode>:
+#include "gpio.h"
+#include <avr/io.h>
+
+void pinMode(int pino, int Mode){
+
+	if(Mode == INPUT){
+  80:	61 15       	cp	r22, r1
+  82:	71 05       	cpc	r23, r1
+  84:	09 f0       	breq	.+2      	; 0x88 <pinMode+0x8>
+  86:	a0 c0       	rjmp	.+320    	; 0x1c8 <pinMode+0x148>
+		if(pino == 0)
+  88:	00 97       	sbiw	r24, 0x00	; 0
+  8a:	21 f4       	brne	.+8      	; 0x94 <pinMode+0x14>
+			DDRB &= ~(1 << PINB0);
+  8c:	84 b1       	in	r24, 0x04	; 4
+  8e:	8e 7f       	andi	r24, 0xFE	; 254
+  90:	84 b9       	out	0x04, r24	; 4
+  92:	08 95       	ret
+		else if(pino == 1)
+  94:	81 30       	cpi	r24, 0x01	; 1
+  96:	91 05       	cpc	r25, r1
+  98:	21 f4       	brne	.+8      	; 0xa2 <pinMode+0x22>
+			DDRB &= ~(1 << PINB1);
+  9a:	84 b1       	in	r24, 0x04	; 4
+  9c:	8d 7f       	andi	r24, 0xFD	; 253
+  9e:	84 b9       	out	0x04, r24	; 4
+  a0:	08 95       	ret
+		else if(pino == 2)
+  a2:	82 30       	cpi	r24, 0x02	; 2
+  a4:	91 05       	cpc	r25, r1
+  a6:	21 f4       	brne	.+8      	; 0xb0 <pinMode+0x30>
+			DDRB &= ~(1 << PINB2);
+  a8:	84 b1       	in	r24, 0x04	; 4
+  aa:	8b 7f       	andi	r24, 0xFB	; 251
+  ac:	84 b9       	out	0x04, r24	; 4
+  ae:	08 95       	ret
+		else if(pino == 3)
+  b0:	83 30       	cpi	r24, 0x03	; 3
+  b2:	91 05       	cpc	r25, r1
+  b4:	21 f4       	brne	.+8      	; 0xbe <pinMode+0x3e>
+			DDRB &= ~(1 << PINB3);
+  b6:	84 b1       	in	r24, 0x04	; 4
+  b8:	87 7f       	andi	r24, 0xF7	; 247
+  ba:	84 b9       	out	0x04, r24	; 4
+  bc:	08 95       	ret
+		else if(pino == 4)
+  be:	84 30       	cpi	r24, 0x04	; 4
+  c0:	91 05       	cpc	r25, r1
+  c2:	21 f4       	brne	.+8      	; 0xcc <pinMode+0x4c>
+			DDRB &= ~(1 << PINB4);
+  c4:	84 b1       	in	r24, 0x04	; 4
+  c6:	8f 7e       	andi	r24, 0xEF	; 239
+  c8:	84 b9       	out	0x04, r24	; 4
+  ca:	08 95       	ret
+		else if(pino == 5)
+  cc:	85 30       	cpi	r24, 0x05	; 5
+  ce:	91 05       	cpc	r25, r1
+  d0:	21 f4       	brne	.+8      	; 0xda <pinMode+0x5a>
+			DDRB &= ~(1 << PINB5);
+  d2:	84 b1       	in	r24, 0x04	; 4
+  d4:	8f 7d       	andi	r24, 0xDF	; 223
+  d6:	84 b9       	out	0x04, r24	; 4
+  d8:	08 95       	ret
+		else if(pino == 6)
+  da:	86 30       	cpi	r24, 0x06	; 6
+  dc:	91 05       	cpc	r25, r1
+  de:	21 f4       	brne	.+8      	; 0xe8 <pinMode+0x68>
+			DDRB &= ~(1 << PINB6);
+  e0:	84 b1       	in	r24, 0x04	; 4
+  e2:	8f 7b       	andi	r24, 0xBF	; 191
+  e4:	84 b9       	out	0x04, r24	; 4
+  e6:	08 95       	ret
+		else if(pino == 7)
+  e8:	87 30       	cpi	r24, 0x07	; 7
+  ea:	91 05       	cpc	r25, r1
+  ec:	21 f4       	brne	.+8      	; 0xf6 <pinMode+0x76>
+			DDRB &= ~(1 << PINB7);
+  ee:	84 b1       	in	r24, 0x04	; 4
+  f0:	8f 77       	andi	r24, 0x7F	; 127
+  f2:	84 b9       	out	0x04, r24	; 4
+  f4:	08 95       	ret
+		else if(pino == 8)
+  f6:	88 30       	cpi	r24, 0x08	; 8
+  f8:	91 05       	cpc	r25, r1
+  fa:	21 f4       	brne	.+8      	; 0x104 <pinMode+0x84>
+			DDRC &= ~(1 << PINC0);
+  fc:	87 b1       	in	r24, 0x07	; 7
+  fe:	8e 7f       	andi	r24, 0xFE	; 254
+ 100:	87 b9       	out	0x07, r24	; 7
+ 102:	08 95       	ret
+		else if(pino == 9)
+ 104:	89 30       	cpi	r24, 0x09	; 9
+ 106:	91 05       	cpc	r25, r1
+ 108:	21 f4       	brne	.+8      	; 0x112 <pinMode+0x92>
+			DDRC &= ~(1 << PINC1);
+ 10a:	87 b1       	in	r24, 0x07	; 7
+ 10c:	8d 7f       	andi	r24, 0xFD	; 253
+ 10e:	87 b9       	out	0x07, r24	; 7
+ 110:	08 95       	ret
+		else if(pino == 10)
+ 112:	8a 30       	cpi	r24, 0x0A	; 10
+ 114:	91 05       	cpc	r25, r1
+ 116:	21 f4       	brne	.+8      	; 0x120 <pinMode+0xa0>
+			DDRC &= ~(1 << PINC2);
+ 118:	87 b1       	in	r24, 0x07	; 7
+ 11a:	8b 7f       	andi	r24, 0xFB	; 251
+ 11c:	87 b9       	out	0x07, r24	; 7
+ 11e:	08 95       	ret
+		else if(pino == 11)
+ 120:	8b 30       	cpi	r24, 0x0B	; 11
+ 122:	91 05       	cpc	r25, r1
+ 124:	21 f4       	brne	.+8      	; 0x12e <pinMode+0xae>
+			DDRC &= ~(1 << PINC3);
+ 126:	87 b1       	in	r24, 0x07	; 7
+ 128:	87 7f       	andi	r24, 0xF7	; 247
+ 12a:	87 b9       	out	0x07, r24	; 7
+ 12c:	08 95       	ret
+		else if(pino == 12)
+ 12e:	8c 30       	cpi	r24, 0x0C	; 12
+ 130:	91 05       	cpc	r25, r1
+ 132:	21 f4       	brne	.+8      	; 0x13c <pinMode+0xbc>
+			DDRC &= ~(1 << PINC4);
+ 134:	87 b1       	in	r24, 0x07	; 7
+ 136:	8f 7e       	andi	r24, 0xEF	; 239
+ 138:	87 b9       	out	0x07, r24	; 7
+ 13a:	08 95       	ret
+		else if(pino == 13)
+ 13c:	8d 30       	cpi	r24, 0x0D	; 13
+ 13e:	91 05       	cpc	r25, r1
+ 140:	21 f4       	brne	.+8      	; 0x14a <pinMode+0xca>
+			DDRC &= ~(1 << PINC5);
+ 142:	87 b1       	in	r24, 0x07	; 7
+ 144:	8f 7d       	andi	r24, 0xDF	; 223
+ 146:	87 b9       	out	0x07, r24	; 7
+ 148:	08 95       	ret
+		else if(pino == 14)
+ 14a:	8e 30       	cpi	r24, 0x0E	; 14
+ 14c:	91 05       	cpc	r25, r1
+ 14e:	21 f4       	brne	.+8      	; 0x158 <pinMode+0xd8>
+			DDRC &= ~(1 << PINC6);
+ 150:	87 b1       	in	r24, 0x07	; 7
+ 152:	8f 7b       	andi	r24, 0xBF	; 191
+ 154:	87 b9       	out	0x07, r24	; 7
+ 156:	08 95       	ret
+		else if(pino == 15)
+ 158:	8f 30       	cpi	r24, 0x0F	; 15
+ 15a:	91 05       	cpc	r25, r1
+ 15c:	21 f4       	brne	.+8      	; 0x166 <pinMode+0xe6>
+			DDRD &= ~(1 << PIND0);
+ 15e:	8a b1       	in	r24, 0x0a	; 10
+ 160:	8e 7f       	andi	r24, 0xFE	; 254
+ 162:	8a b9       	out	0x0a, r24	; 10
+ 164:	08 95       	ret
+		else if(pino == 16)
+ 166:	80 31       	cpi	r24, 0x10	; 16
+ 168:	91 05       	cpc	r25, r1
+ 16a:	21 f4       	brne	.+8      	; 0x174 <pinMode+0xf4>
+			DDRD &= ~(1 << PIND1);
+ 16c:	8a b1       	in	r24, 0x0a	; 10
+ 16e:	8d 7f       	andi	r24, 0xFD	; 253
+ 170:	8a b9       	out	0x0a, r24	; 10
+ 172:	08 95       	ret
+		else if(pino == 17)
+ 174:	81 31       	cpi	r24, 0x11	; 17
+ 176:	91 05       	cpc	r25, r1
+ 178:	21 f4       	brne	.+8      	; 0x182 <pinMode+0x102>
+			DDRD &= ~(1 << PIND2);
+ 17a:	8a b1       	in	r24, 0x0a	; 10
+ 17c:	8b 7f       	andi	r24, 0xFB	; 251
+ 17e:	8a b9       	out	0x0a, r24	; 10
+ 180:	08 95       	ret
+		else if(pino == 18)
+ 182:	82 31       	cpi	r24, 0x12	; 18
+ 184:	91 05       	cpc	r25, r1
+ 186:	21 f4       	brne	.+8      	; 0x190 <pinMode+0x110>
+			DDRD &= ~(1 << PIND3);
+ 188:	8a b1       	in	r24, 0x0a	; 10
+ 18a:	87 7f       	andi	r24, 0xF7	; 247
+ 18c:	8a b9       	out	0x0a, r24	; 10
+ 18e:	08 95       	ret
+		else if(pino == 19)
+ 190:	83 31       	cpi	r24, 0x13	; 19
+ 192:	91 05       	cpc	r25, r1
+ 194:	21 f4       	brne	.+8      	; 0x19e <pinMode+0x11e>
+			DDRD &= ~(1 << PIND4);
+ 196:	8a b1       	in	r24, 0x0a	; 10
+ 198:	8f 7e       	andi	r24, 0xEF	; 239
+ 19a:	8a b9       	out	0x0a, r24	; 10
+ 19c:	08 95       	ret
+		else if(pino == 20)
+ 19e:	84 31       	cpi	r24, 0x14	; 20
+ 1a0:	91 05       	cpc	r25, r1
+ 1a2:	21 f4       	brne	.+8      	; 0x1ac <pinMode+0x12c>
+			DDRD &= ~(1 << PIND5);
+ 1a4:	8a b1       	in	r24, 0x0a	; 10
+ 1a6:	8f 7d       	andi	r24, 0xDF	; 223
+ 1a8:	8a b9       	out	0x0a, r24	; 10
+ 1aa:	08 95       	ret
+		else if(pino == 21)
+ 1ac:	85 31       	cpi	r24, 0x15	; 21
+ 1ae:	91 05       	cpc	r25, r1
+ 1b0:	21 f4       	brne	.+8      	; 0x1ba <pinMode+0x13a>
+			DDRD &= ~(1 << PIND6);
+ 1b2:	8a b1       	in	r24, 0x0a	; 10
+ 1b4:	8f 7b       	andi	r24, 0xBF	; 191
+ 1b6:	8a b9       	out	0x0a, r24	; 10
+ 1b8:	08 95       	ret
+		else if(pino == 22)
+ 1ba:	46 97       	sbiw	r24, 0x16	; 22
+ 1bc:	09 f0       	breq	.+2      	; 0x1c0 <pinMode+0x140>
+ 1be:	a6 c0       	rjmp	.+332    	; 0x30c <pinMode+0x28c>
+			DDRD &= ~(1 << PIND7);
+ 1c0:	8a b1       	in	r24, 0x0a	; 10
+ 1c2:	8f 77       	andi	r24, 0x7F	; 127
+ 1c4:	8a b9       	out	0x0a, r24	; 10
+ 1c6:	08 95       	ret
+	}
+	else if(Mode == OUTPUT){
+ 1c8:	61 30       	cpi	r22, 0x01	; 1
+ 1ca:	71 05       	cpc	r23, r1
+ 1cc:	09 f0       	breq	.+2      	; 0x1d0 <pinMode+0x150>
+ 1ce:	9e c0       	rjmp	.+316    	; 0x30c <pinMode+0x28c>
+		if(pino == 0)
+ 1d0:	00 97       	sbiw	r24, 0x00	; 0
+ 1d2:	21 f4       	brne	.+8      	; 0x1dc <pinMode+0x15c>
+			DDRB |= (1 << PINB0);
+ 1d4:	84 b1       	in	r24, 0x04	; 4
+ 1d6:	81 60       	ori	r24, 0x01	; 1
+ 1d8:	84 b9       	out	0x04, r24	; 4
+ 1da:	08 95       	ret
+		else if(pino == 1)
+ 1dc:	81 30       	cpi	r24, 0x01	; 1
+ 1de:	91 05       	cpc	r25, r1
+ 1e0:	21 f4       	brne	.+8      	; 0x1ea <pinMode+0x16a>
+			DDRB |= (1 << PINB1);
+ 1e2:	84 b1       	in	r24, 0x04	; 4
+ 1e4:	82 60       	ori	r24, 0x02	; 2
+ 1e6:	84 b9       	out	0x04, r24	; 4
+ 1e8:	08 95       	ret
+		else if(pino == 2)
+ 1ea:	82 30       	cpi	r24, 0x02	; 2
+ 1ec:	91 05       	cpc	r25, r1
+ 1ee:	21 f4       	brne	.+8      	; 0x1f8 <pinMode+0x178>
+			DDRB |= (1 << PINB2);
+ 1f0:	84 b1       	in	r24, 0x04	; 4
+ 1f2:	84 60       	ori	r24, 0x04	; 4
+ 1f4:	84 b9       	out	0x04, r24	; 4
+ 1f6:	08 95       	ret
+		else if(pino == 3)
+ 1f8:	83 30       	cpi	r24, 0x03	; 3
+ 1fa:	91 05       	cpc	r25, r1
+ 1fc:	21 f4       	brne	.+8      	; 0x206 <pinMode+0x186>
+			DDRB |= (1 << PINB3);
+ 1fe:	84 b1       	in	r24, 0x04	; 4
+ 200:	88 60       	ori	r24, 0x08	; 8
+ 202:	84 b9       	out	0x04, r24	; 4
+ 204:	08 95       	ret
+		else if(pino == 4)
+ 206:	84 30       	cpi	r24, 0x04	; 4
+ 208:	91 05       	cpc	r25, r1
+ 20a:	21 f4       	brne	.+8      	; 0x214 <pinMode+0x194>
+			DDRB |= (1 << PINB4);
+ 20c:	84 b1       	in	r24, 0x04	; 4
+ 20e:	80 61       	ori	r24, 0x10	; 16
+ 210:	84 b9       	out	0x04, r24	; 4
+ 212:	08 95       	ret
+		else if(pino == 5)
+ 214:	85 30       	cpi	r24, 0x05	; 5
+ 216:	91 05       	cpc	r25, r1
+ 218:	21 f4       	brne	.+8      	; 0x222 <pinMode+0x1a2>
+			DDRB |= (1 << PINB5);
+ 21a:	84 b1       	in	r24, 0x04	; 4
+ 21c:	80 62       	ori	r24, 0x20	; 32
+ 21e:	84 b9       	out	0x04, r24	; 4
+ 220:	08 95       	ret
+		else if(pino == 6)
+ 222:	86 30       	cpi	r24, 0x06	; 6
+ 224:	91 05       	cpc	r25, r1
+ 226:	21 f4       	brne	.+8      	; 0x230 <pinMode+0x1b0>
+			DDRB |= (1 << PINB6);
+ 228:	84 b1       	in	r24, 0x04	; 4
+ 22a:	80 64       	ori	r24, 0x40	; 64
+ 22c:	84 b9       	out	0x04, r24	; 4
+ 22e:	08 95       	ret
+		else if(pino == 7)
+ 230:	87 30       	cpi	r24, 0x07	; 7
+ 232:	91 05       	cpc	r25, r1
+ 234:	21 f4       	brne	.+8      	; 0x23e <pinMode+0x1be>
+			DDRB |= (1 << PINB7);
+ 236:	84 b1       	in	r24, 0x04	; 4
+ 238:	80 68       	ori	r24, 0x80	; 128
+ 23a:	84 b9       	out	0x04, r24	; 4
+ 23c:	08 95       	ret
+		else if(pino == 8)
+ 23e:	88 30       	cpi	r24, 0x08	; 8
+ 240:	91 05       	cpc	r25, r1
+ 242:	21 f4       	brne	.+8      	; 0x24c <pinMode+0x1cc>
+			DDRC |= (1 << PINC0);
+ 244:	87 b1       	in	r24, 0x07	; 7
+ 246:	81 60       	ori	r24, 0x01	; 1
+ 248:	87 b9       	out	0x07, r24	; 7
+ 24a:	08 95       	ret
+		else if(pino == 9)
+ 24c:	89 30       	cpi	r24, 0x09	; 9
+ 24e:	91 05       	cpc	r25, r1
+ 250:	21 f4       	brne	.+8      	; 0x25a <pinMode+0x1da>
+			DDRC |= (1 << PINC1);
+ 252:	87 b1       	in	r24, 0x07	; 7
+ 254:	82 60       	ori	r24, 0x02	; 2
+ 256:	87 b9       	out	0x07, r24	; 7
+ 258:	08 95       	ret
+		else if(pino == 10)
+ 25a:	8a 30       	cpi	r24, 0x0A	; 10
+ 25c:	91 05       	cpc	r25, r1
+ 25e:	21 f4       	brne	.+8      	; 0x268 <pinMode+0x1e8>
+			DDRC |= (1 << PINC2);
+ 260:	87 b1       	in	r24, 0x07	; 7
+ 262:	84 60       	ori	r24, 0x04	; 4
+ 264:	87 b9       	out	0x07, r24	; 7
+ 266:	08 95       	ret
+		else if(pino == 11)
+ 268:	8b 30       	cpi	r24, 0x0B	; 11
+ 26a:	91 05       	cpc	r25, r1
+ 26c:	21 f4       	brne	.+8      	; 0x276 <pinMode+0x1f6>
+			DDRC |= (1 << PINC3);
+ 26e:	87 b1       	in	r24, 0x07	; 7
+ 270:	88 60       	ori	r24, 0x08	; 8
+ 272:	87 b9       	out	0x07, r24	; 7
+ 274:	08 95       	ret
+		else if(pino == 12)
+ 276:	8c 30       	cpi	r24, 0x0C	; 12
+ 278:	91 05       	cpc	r25, r1
+ 27a:	21 f4       	brne	.+8      	; 0x284 <pinMode+0x204>
+			DDRC |= (1 << PINC4);
+ 27c:	87 b1       	in	r24, 0x07	; 7
+ 27e:	80 61       	ori	r24, 0x10	; 16
+ 280:	87 b9       	out	0x07, r24	; 7
+ 282:	08 95       	ret
+		else if(pino == 13)
+ 284:	8d 30       	cpi	r24, 0x0D	; 13
+ 286:	91 05       	cpc	r25, r1
+ 288:	21 f4       	brne	.+8      	; 0x292 <pinMode+0x212>
+			DDRC |= (1 << PINC5);
+ 28a:	87 b1       	in	r24, 0x07	; 7
+ 28c:	80 62       	ori	r24, 0x20	; 32
+ 28e:	87 b9       	out	0x07, r24	; 7
+ 290:	08 95       	ret
+		else if(pino == 14)
+ 292:	8e 30       	cpi	r24, 0x0E	; 14
+ 294:	91 05       	cpc	r25, r1
+ 296:	21 f4       	brne	.+8      	; 0x2a0 <pinMode+0x220>
+			DDRC |= (1 << PINC6);
+ 298:	87 b1       	in	r24, 0x07	; 7
+ 29a:	80 64       	ori	r24, 0x40	; 64
+ 29c:	87 b9       	out	0x07, r24	; 7
+ 29e:	08 95       	ret
+		else if(pino == 15)
+ 2a0:	8f 30       	cpi	r24, 0x0F	; 15
+ 2a2:	91 05       	cpc	r25, r1
+ 2a4:	21 f4       	brne	.+8      	; 0x2ae <pinMode+0x22e>
+			DDRD |= (1 << PIND0);
+ 2a6:	8a b1       	in	r24, 0x0a	; 10
+ 2a8:	81 60       	ori	r24, 0x01	; 1
+ 2aa:	8a b9       	out	0x0a, r24	; 10
+ 2ac:	08 95       	ret
+		else if(pino == 16)
+ 2ae:	80 31       	cpi	r24, 0x10	; 16
+ 2b0:	91 05       	cpc	r25, r1
+ 2b2:	21 f4       	brne	.+8      	; 0x2bc <pinMode+0x23c>
+			DDRD |= (1 << PIND1);
+ 2b4:	8a b1       	in	r24, 0x0a	; 10
+ 2b6:	82 60       	ori	r24, 0x02	; 2
+ 2b8:	8a b9       	out	0x0a, r24	; 10
+ 2ba:	08 95       	ret
+		else if(pino == 17)
+ 2bc:	81 31       	cpi	r24, 0x11	; 17
+ 2be:	91 05       	cpc	r25, r1
+ 2c0:	21 f4       	brne	.+8      	; 0x2ca <pinMode+0x24a>
+			DDRD |= (1 << PIND2);
+ 2c2:	8a b1       	in	r24, 0x0a	; 10
+ 2c4:	84 60       	ori	r24, 0x04	; 4
+ 2c6:	8a b9       	out	0x0a, r24	; 10
+ 2c8:	08 95       	ret
+		else if(pino == 18)
+ 2ca:	82 31       	cpi	r24, 0x12	; 18
+ 2cc:	91 05       	cpc	r25, r1
+ 2ce:	21 f4       	brne	.+8      	; 0x2d8 <pinMode+0x258>
+			DDRD |= (1 << PIND3);
+ 2d0:	8a b1       	in	r24, 0x0a	; 10
+ 2d2:	88 60       	ori	r24, 0x08	; 8
+ 2d4:	8a b9       	out	0x0a, r24	; 10
+ 2d6:	08 95       	ret
+		else if(pino == 19)
+ 2d8:	83 31       	cpi	r24, 0x13	; 19
+ 2da:	91 05       	cpc	r25, r1
+ 2dc:	21 f4       	brne	.+8      	; 0x2e6 <pinMode+0x266>
+			DDRD |= (1 << PIND4);
+ 2de:	8a b1       	in	r24, 0x0a	; 10
+ 2e0:	80 61       	ori	r24, 0x10	; 16
+ 2e2:	8a b9       	out	0x0a, r24	; 10
+ 2e4:	08 95       	ret
+		else if(pino == 20)
+ 2e6:	84 31       	cpi	r24, 0x14	; 20
+ 2e8:	91 05       	cpc	r25, r1
+ 2ea:	21 f4       	brne	.+8      	; 0x2f4 <pinMode+0x274>
+			DDRD |= (1 << PIND5);
+ 2ec:	8a b1       	in	r24, 0x0a	; 10
+ 2ee:	80 62       	ori	r24, 0x20	; 32
+ 2f0:	8a b9       	out	0x0a, r24	; 10
+ 2f2:	08 95       	ret
+		else if(pino == 21)
+ 2f4:	85 31       	cpi	r24, 0x15	; 21
+ 2f6:	91 05       	cpc	r25, r1
+ 2f8:	21 f4       	brne	.+8      	; 0x302 <pinMode+0x282>
+			DDRD |= (1 << PIND6);
+ 2fa:	8a b1       	in	r24, 0x0a	; 10
+ 2fc:	80 64       	ori	r24, 0x40	; 64
+ 2fe:	8a b9       	out	0x0a, r24	; 10
+ 300:	08 95       	ret
+		else if(pino == 22)
+ 302:	46 97       	sbiw	r24, 0x16	; 22
+ 304:	19 f4       	brne	.+6      	; 0x30c <pinMode+0x28c>
+			DDRD |= (1 << PIND7);
+ 306:	8a b1       	in	r24, 0x0a	; 10
+ 308:	80 68       	ori	r24, 0x80	; 128
+ 30a:	8a b9       	out	0x0a, r24	; 10
+ 30c:	08 95       	ret
+
+0000030e <digitalWrite>:
+	}
+}
+
+void digitalWrite(int pino, int state){
+
+	if(state == LOW){
+ 30e:	61 15       	cp	r22, r1
+ 310:	71 05       	cpc	r23, r1
+ 312:	09 f0       	breq	.+2      	; 0x316 <digitalWrite+0x8>
+ 314:	a0 c0       	rjmp	.+320    	; 0x456 <__EEPROM_REGION_LENGTH__+0x56>
+		if(pino == 0)
+ 316:	00 97       	sbiw	r24, 0x00	; 0
+ 318:	21 f4       	brne	.+8      	; 0x322 <digitalWrite+0x14>
+			PORTB &= ~(1 << PB0);
+ 31a:	85 b1       	in	r24, 0x05	; 5
+ 31c:	8e 7f       	andi	r24, 0xFE	; 254
+ 31e:	85 b9       	out	0x05, r24	; 5
+ 320:	08 95       	ret
+		else if(pino == 1)
+ 322:	81 30       	cpi	r24, 0x01	; 1
+ 324:	91 05       	cpc	r25, r1
+ 326:	21 f4       	brne	.+8      	; 0x330 <digitalWrite+0x22>
+			PORTB &= ~(1 << PB1);
+ 328:	85 b1       	in	r24, 0x05	; 5
+ 32a:	8d 7f       	andi	r24, 0xFD	; 253
+ 32c:	85 b9       	out	0x05, r24	; 5
+ 32e:	08 95       	ret
+		else if(pino == 2)
+ 330:	82 30       	cpi	r24, 0x02	; 2
+ 332:	91 05       	cpc	r25, r1
+ 334:	21 f4       	brne	.+8      	; 0x33e <digitalWrite+0x30>
+			PORTB &= ~(1 << PB2);
+ 336:	85 b1       	in	r24, 0x05	; 5
+ 338:	8b 7f       	andi	r24, 0xFB	; 251
+ 33a:	85 b9       	out	0x05, r24	; 5
+ 33c:	08 95       	ret
+		else if(pino == 3)
+ 33e:	83 30       	cpi	r24, 0x03	; 3
+ 340:	91 05       	cpc	r25, r1
+ 342:	21 f4       	brne	.+8      	; 0x34c <digitalWrite+0x3e>
+			PORTB &= ~(1 << PB3);
+ 344:	85 b1       	in	r24, 0x05	; 5
+ 346:	87 7f       	andi	r24, 0xF7	; 247
+ 348:	85 b9       	out	0x05, r24	; 5
+ 34a:	08 95       	ret
+		else if(pino == 4)
+ 34c:	84 30       	cpi	r24, 0x04	; 4
+ 34e:	91 05       	cpc	r25, r1
+ 350:	21 f4       	brne	.+8      	; 0x35a <digitalWrite+0x4c>
+			PORTB &= ~(1 << PB4);
+ 352:	85 b1       	in	r24, 0x05	; 5
+ 354:	8f 7e       	andi	r24, 0xEF	; 239
+ 356:	85 b9       	out	0x05, r24	; 5
+ 358:	08 95       	ret
+		else if(pino == 5)
+ 35a:	85 30       	cpi	r24, 0x05	; 5
+ 35c:	91 05       	cpc	r25, r1
+ 35e:	21 f4       	brne	.+8      	; 0x368 <digitalWrite+0x5a>
+			PORTB &= ~(1 << PB5);
+ 360:	85 b1       	in	r24, 0x05	; 5
+ 362:	8f 7d       	andi	r24, 0xDF	; 223
+ 364:	85 b9       	out	0x05, r24	; 5
+ 366:	08 95       	ret
+		else if(pino == 6)
+ 368:	86 30       	cpi	r24, 0x06	; 6
+ 36a:	91 05       	cpc	r25, r1
+ 36c:	21 f4       	brne	.+8      	; 0x376 <digitalWrite+0x68>
+			PORTB &= ~(1 << PB6);
+ 36e:	85 b1       	in	r24, 0x05	; 5
+ 370:	8f 7b       	andi	r24, 0xBF	; 191
+ 372:	85 b9       	out	0x05, r24	; 5
+ 374:	08 95       	ret
+		else if(pino == 7)
+ 376:	87 30       	cpi	r24, 0x07	; 7
+ 378:	91 05       	cpc	r25, r1
+ 37a:	21 f4       	brne	.+8      	; 0x384 <digitalWrite+0x76>
+			PORTB &= ~(1 << PB7);
+ 37c:	85 b1       	in	r24, 0x05	; 5
+ 37e:	8f 77       	andi	r24, 0x7F	; 127
+ 380:	85 b9       	out	0x05, r24	; 5
+ 382:	08 95       	ret
+		else if(pino == 8)
+ 384:	88 30       	cpi	r24, 0x08	; 8
+ 386:	91 05       	cpc	r25, r1
+ 388:	21 f4       	brne	.+8      	; 0x392 <digitalWrite+0x84>
+			PORTC &= ~(1 << PC0);
+ 38a:	88 b1       	in	r24, 0x08	; 8
+ 38c:	8e 7f       	andi	r24, 0xFE	; 254
+ 38e:	88 b9       	out	0x08, r24	; 8
+ 390:	08 95       	ret
+		else if(pino == 9)
+ 392:	89 30       	cpi	r24, 0x09	; 9
+ 394:	91 05       	cpc	r25, r1
+ 396:	21 f4       	brne	.+8      	; 0x3a0 <digitalWrite+0x92>
+			PORTC &= ~(1 << PC1);
+ 398:	88 b1       	in	r24, 0x08	; 8
+ 39a:	8d 7f       	andi	r24, 0xFD	; 253
+ 39c:	88 b9       	out	0x08, r24	; 8
+ 39e:	08 95       	ret
+		else if(pino == 10)
+ 3a0:	8a 30       	cpi	r24, 0x0A	; 10
+ 3a2:	91 05       	cpc	r25, r1
+ 3a4:	21 f4       	brne	.+8      	; 0x3ae <digitalWrite+0xa0>
+			PORTC &= ~(1 << PC2);
+ 3a6:	88 b1       	in	r24, 0x08	; 8
+ 3a8:	8b 7f       	andi	r24, 0xFB	; 251
+ 3aa:	88 b9       	out	0x08, r24	; 8
+ 3ac:	08 95       	ret
+		else if(pino == 11)
+ 3ae:	8b 30       	cpi	r24, 0x0B	; 11
+ 3b0:	91 05       	cpc	r25, r1
+ 3b2:	21 f4       	brne	.+8      	; 0x3bc <digitalWrite+0xae>
+			PORTC &= ~(1 << PC3);
+ 3b4:	88 b1       	in	r24, 0x08	; 8
+ 3b6:	87 7f       	andi	r24, 0xF7	; 247
+ 3b8:	88 b9       	out	0x08, r24	; 8
+ 3ba:	08 95       	ret
+		else if(pino == 12)
+ 3bc:	8c 30       	cpi	r24, 0x0C	; 12
+ 3be:	91 05       	cpc	r25, r1
+ 3c0:	21 f4       	brne	.+8      	; 0x3ca <digitalWrite+0xbc>
+			PORTC &= ~(1 << PC4);
+ 3c2:	88 b1       	in	r24, 0x08	; 8
+ 3c4:	8f 7e       	andi	r24, 0xEF	; 239
+ 3c6:	88 b9       	out	0x08, r24	; 8
+ 3c8:	08 95       	ret
+		else if(pino == 13)
+ 3ca:	8d 30       	cpi	r24, 0x0D	; 13
+ 3cc:	91 05       	cpc	r25, r1
+ 3ce:	21 f4       	brne	.+8      	; 0x3d8 <digitalWrite+0xca>
+			PORTC &= ~(1 << PC5);
+ 3d0:	88 b1       	in	r24, 0x08	; 8
+ 3d2:	8f 7d       	andi	r24, 0xDF	; 223
+ 3d4:	88 b9       	out	0x08, r24	; 8
+ 3d6:	08 95       	ret
+		else if(pino == 14)
+ 3d8:	8e 30       	cpi	r24, 0x0E	; 14
+ 3da:	91 05       	cpc	r25, r1
+ 3dc:	21 f4       	brne	.+8      	; 0x3e6 <digitalWrite+0xd8>
+			PORTC &= ~(1 << PC6);
+ 3de:	88 b1       	in	r24, 0x08	; 8
+ 3e0:	8f 7b       	andi	r24, 0xBF	; 191
+ 3e2:	88 b9       	out	0x08, r24	; 8
+ 3e4:	08 95       	ret
+		else if(pino == 15)
+ 3e6:	8f 30       	cpi	r24, 0x0F	; 15
+ 3e8:	91 05       	cpc	r25, r1
+ 3ea:	21 f4       	brne	.+8      	; 0x3f4 <digitalWrite+0xe6>
+			PORTD &= ~(1 << PD0);
+ 3ec:	8b b1       	in	r24, 0x0b	; 11
+ 3ee:	8e 7f       	andi	r24, 0xFE	; 254
+ 3f0:	8b b9       	out	0x0b, r24	; 11
+ 3f2:	08 95       	ret
+		else if(pino == 16)
+ 3f4:	80 31       	cpi	r24, 0x10	; 16
+ 3f6:	91 05       	cpc	r25, r1
+ 3f8:	21 f4       	brne	.+8      	; 0x402 <__EEPROM_REGION_LENGTH__+0x2>
+			PORTD &= ~(1 << PD1);
+ 3fa:	8b b1       	in	r24, 0x0b	; 11
+ 3fc:	8d 7f       	andi	r24, 0xFD	; 253
+ 3fe:	8b b9       	out	0x0b, r24	; 11
+ 400:	08 95       	ret
+		else if(pino == 17)
+ 402:	81 31       	cpi	r24, 0x11	; 17
+ 404:	91 05       	cpc	r25, r1
+ 406:	21 f4       	brne	.+8      	; 0x410 <__EEPROM_REGION_LENGTH__+0x10>
+			PORTD &= ~(1 << PD2);
+ 408:	8b b1       	in	r24, 0x0b	; 11
+ 40a:	8b 7f       	andi	r24, 0xFB	; 251
+ 40c:	8b b9       	out	0x0b, r24	; 11
+ 40e:	08 95       	ret
+		else if(pino == 18)
+ 410:	82 31       	cpi	r24, 0x12	; 18
+ 412:	91 05       	cpc	r25, r1
+ 414:	21 f4       	brne	.+8      	; 0x41e <__EEPROM_REGION_LENGTH__+0x1e>
+			PORTD &= ~(1 << PD3);
+ 416:	8b b1       	in	r24, 0x0b	; 11
+ 418:	87 7f       	andi	r24, 0xF7	; 247
+ 41a:	8b b9       	out	0x0b, r24	; 11
+ 41c:	08 95       	ret
+		else if(pino == 19)
+ 41e:	83 31       	cpi	r24, 0x13	; 19
+ 420:	91 05       	cpc	r25, r1
+ 422:	21 f4       	brne	.+8      	; 0x42c <__EEPROM_REGION_LENGTH__+0x2c>
+			PORTD &= ~(1 << PD4);
+ 424:	8b b1       	in	r24, 0x0b	; 11
+ 426:	8f 7e       	andi	r24, 0xEF	; 239
+ 428:	8b b9       	out	0x0b, r24	; 11
+ 42a:	08 95       	ret
+		else if(pino == 20)
+ 42c:	84 31       	cpi	r24, 0x14	; 20
+ 42e:	91 05       	cpc	r25, r1
+ 430:	21 f4       	brne	.+8      	; 0x43a <__EEPROM_REGION_LENGTH__+0x3a>
+			PORTD &= ~(1 << PD5);
+ 432:	8b b1       	in	r24, 0x0b	; 11
+ 434:	8f 7d       	andi	r24, 0xDF	; 223
+ 436:	8b b9       	out	0x0b, r24	; 11
+ 438:	08 95       	ret
+		else if(pino == 21)
+ 43a:	85 31       	cpi	r24, 0x15	; 21
+ 43c:	91 05       	cpc	r25, r1
+ 43e:	21 f4       	brne	.+8      	; 0x448 <__EEPROM_REGION_LENGTH__+0x48>
+			PORTD &= ~(1 << PD6);
+ 440:	8b b1       	in	r24, 0x0b	; 11
+ 442:	8f 7b       	andi	r24, 0xBF	; 191
+ 444:	8b b9       	out	0x0b, r24	; 11
+ 446:	08 95       	ret
+		else if(pino == 22)
+ 448:	46 97       	sbiw	r24, 0x16	; 22
+ 44a:	09 f0       	breq	.+2      	; 0x44e <__EEPROM_REGION_LENGTH__+0x4e>
+ 44c:	a6 c0       	rjmp	.+332    	; 0x59a <__EEPROM_REGION_LENGTH__+0x19a>
+			PORTD &= ~(1 << PD7);
+ 44e:	8b b1       	in	r24, 0x0b	; 11
+ 450:	8f 77       	andi	r24, 0x7F	; 127
+ 452:	8b b9       	out	0x0b, r24	; 11
+ 454:	08 95       	ret
+	}
+	else if(state == HIGH){
+ 456:	61 30       	cpi	r22, 0x01	; 1
+ 458:	71 05       	cpc	r23, r1
+ 45a:	09 f0       	breq	.+2      	; 0x45e <__EEPROM_REGION_LENGTH__+0x5e>
+ 45c:	9e c0       	rjmp	.+316    	; 0x59a <__EEPROM_REGION_LENGTH__+0x19a>
+		if(pino == 0)
+ 45e:	00 97       	sbiw	r24, 0x00	; 0
+ 460:	21 f4       	brne	.+8      	; 0x46a <__EEPROM_REGION_LENGTH__+0x6a>
+			PORTB |= (1 << PB0);
+ 462:	85 b1       	in	r24, 0x05	; 5
+ 464:	81 60       	ori	r24, 0x01	; 1
+ 466:	85 b9       	out	0x05, r24	; 5
+ 468:	08 95       	ret
+		else if(pino == 1)
+ 46a:	81 30       	cpi	r24, 0x01	; 1
+ 46c:	91 05       	cpc	r25, r1
+ 46e:	21 f4       	brne	.+8      	; 0x478 <__EEPROM_REGION_LENGTH__+0x78>
+			PORTB |= (1 << PB1);
+ 470:	85 b1       	in	r24, 0x05	; 5
+ 472:	82 60       	ori	r24, 0x02	; 2
+ 474:	85 b9       	out	0x05, r24	; 5
+ 476:	08 95       	ret
+		else if(pino == 2)
+ 478:	82 30       	cpi	r24, 0x02	; 2
+ 47a:	91 05       	cpc	r25, r1
+ 47c:	21 f4       	brne	.+8      	; 0x486 <__EEPROM_REGION_LENGTH__+0x86>
+			PORTB |= (1 << PB2);
+ 47e:	85 b1       	in	r24, 0x05	; 5
+ 480:	84 60       	ori	r24, 0x04	; 4
+ 482:	85 b9       	out	0x05, r24	; 5
+ 484:	08 95       	ret
+		else if(pino == 3)
+ 486:	83 30       	cpi	r24, 0x03	; 3
+ 488:	91 05       	cpc	r25, r1
+ 48a:	21 f4       	brne	.+8      	; 0x494 <__EEPROM_REGION_LENGTH__+0x94>
+			PORTB |= (1 << PB3);
+ 48c:	85 b1       	in	r24, 0x05	; 5
+ 48e:	88 60       	ori	r24, 0x08	; 8
+ 490:	85 b9       	out	0x05, r24	; 5
+ 492:	08 95       	ret
+		else if(pino == 4)
+ 494:	84 30       	cpi	r24, 0x04	; 4
+ 496:	91 05       	cpc	r25, r1
+ 498:	21 f4       	brne	.+8      	; 0x4a2 <__EEPROM_REGION_LENGTH__+0xa2>
+			PORTB |= (1 << PB4);
+ 49a:	85 b1       	in	r24, 0x05	; 5
+ 49c:	80 61       	ori	r24, 0x10	; 16
+ 49e:	85 b9       	out	0x05, r24	; 5
+ 4a0:	08 95       	ret
+		else if(pino == 5)
+ 4a2:	85 30       	cpi	r24, 0x05	; 5
+ 4a4:	91 05       	cpc	r25, r1
+ 4a6:	21 f4       	brne	.+8      	; 0x4b0 <__EEPROM_REGION_LENGTH__+0xb0>
+			PORTB |= (1 << PB5);
+ 4a8:	85 b1       	in	r24, 0x05	; 5
+ 4aa:	80 62       	ori	r24, 0x20	; 32
+ 4ac:	85 b9       	out	0x05, r24	; 5
+ 4ae:	08 95       	ret
+		else if(pino == 6)
+ 4b0:	86 30       	cpi	r24, 0x06	; 6
+ 4b2:	91 05       	cpc	r25, r1
+ 4b4:	21 f4       	brne	.+8      	; 0x4be <__EEPROM_REGION_LENGTH__+0xbe>
+			PORTB |= (1 << PB6);
+ 4b6:	85 b1       	in	r24, 0x05	; 5
+ 4b8:	80 64       	ori	r24, 0x40	; 64
+ 4ba:	85 b9       	out	0x05, r24	; 5
+ 4bc:	08 95       	ret
+		else if(pino == 7)
+ 4be:	87 30       	cpi	r24, 0x07	; 7
+ 4c0:	91 05       	cpc	r25, r1
+ 4c2:	21 f4       	brne	.+8      	; 0x4cc <__EEPROM_REGION_LENGTH__+0xcc>
+			PORTB |= (1 << PB7);
+ 4c4:	85 b1       	in	r24, 0x05	; 5
+ 4c6:	80 68       	ori	r24, 0x80	; 128
+ 4c8:	85 b9       	out	0x05, r24	; 5
+ 4ca:	08 95       	ret
+		else if(pino == 8)
+ 4cc:	88 30       	cpi	r24, 0x08	; 8
+ 4ce:	91 05       	cpc	r25, r1
+ 4d0:	21 f4       	brne	.+8      	; 0x4da <__EEPROM_REGION_LENGTH__+0xda>
+			PORTC |= (1 << PC0);
+ 4d2:	88 b1       	in	r24, 0x08	; 8
+ 4d4:	81 60       	ori	r24, 0x01	; 1
+ 4d6:	88 b9       	out	0x08, r24	; 8
+ 4d8:	08 95       	ret
+		else if(pino == 9)
+ 4da:	89 30       	cpi	r24, 0x09	; 9
+ 4dc:	91 05       	cpc	r25, r1
+ 4de:	21 f4       	brne	.+8      	; 0x4e8 <__EEPROM_REGION_LENGTH__+0xe8>
+			PORTC |= (1 << PC1);
+ 4e0:	88 b1       	in	r24, 0x08	; 8
+ 4e2:	82 60       	ori	r24, 0x02	; 2
+ 4e4:	88 b9       	out	0x08, r24	; 8
+ 4e6:	08 95       	ret
+		else if(pino == 10)
+ 4e8:	8a 30       	cpi	r24, 0x0A	; 10
+ 4ea:	91 05       	cpc	r25, r1
+ 4ec:	21 f4       	brne	.+8      	; 0x4f6 <__EEPROM_REGION_LENGTH__+0xf6>
+			PORTC |= (1 << PC2);
+ 4ee:	88 b1       	in	r24, 0x08	; 8
+ 4f0:	84 60       	ori	r24, 0x04	; 4
+ 4f2:	88 b9       	out	0x08, r24	; 8
+ 4f4:	08 95       	ret
+		else if(pino == 11)
+ 4f6:	8b 30       	cpi	r24, 0x0B	; 11
+ 4f8:	91 05       	cpc	r25, r1
+ 4fa:	21 f4       	brne	.+8      	; 0x504 <__EEPROM_REGION_LENGTH__+0x104>
+			PORTC |= (1 << PC3);
+ 4fc:	88 b1       	in	r24, 0x08	; 8
+ 4fe:	88 60       	ori	r24, 0x08	; 8
+ 500:	88 b9       	out	0x08, r24	; 8
+ 502:	08 95       	ret
+		else if(pino == 12)
+ 504:	8c 30       	cpi	r24, 0x0C	; 12
+ 506:	91 05       	cpc	r25, r1
+ 508:	21 f4       	brne	.+8      	; 0x512 <__EEPROM_REGION_LENGTH__+0x112>
+			PORTC |= (1 << PC4);
+ 50a:	88 b1       	in	r24, 0x08	; 8
+ 50c:	80 61       	ori	r24, 0x10	; 16
+ 50e:	88 b9       	out	0x08, r24	; 8
+ 510:	08 95       	ret
+		else if(pino == 13)
+ 512:	8d 30       	cpi	r24, 0x0D	; 13
+ 514:	91 05       	cpc	r25, r1
+ 516:	21 f4       	brne	.+8      	; 0x520 <__EEPROM_REGION_LENGTH__+0x120>
+			PORTC |= (1 << PC5);
+ 518:	88 b1       	in	r24, 0x08	; 8
+ 51a:	80 62       	ori	r24, 0x20	; 32
+ 51c:	88 b9       	out	0x08, r24	; 8
+ 51e:	08 95       	ret
+		else if(pino == 14)
+ 520:	8e 30       	cpi	r24, 0x0E	; 14
+ 522:	91 05       	cpc	r25, r1
+ 524:	21 f4       	brne	.+8      	; 0x52e <__EEPROM_REGION_LENGTH__+0x12e>
+			PORTC |= (1 << PC6);
+ 526:	88 b1       	in	r24, 0x08	; 8
+ 528:	80 64       	ori	r24, 0x40	; 64
+ 52a:	88 b9       	out	0x08, r24	; 8
+ 52c:	08 95       	ret
+		else if(pino == 15)
+ 52e:	8f 30       	cpi	r24, 0x0F	; 15
+ 530:	91 05       	cpc	r25, r1
+ 532:	21 f4       	brne	.+8      	; 0x53c <__EEPROM_REGION_LENGTH__+0x13c>
+			PORTD |= (1 << PD0);
+ 534:	8b b1       	in	r24, 0x0b	; 11
+ 536:	81 60       	ori	r24, 0x01	; 1
+ 538:	8b b9       	out	0x0b, r24	; 11
+ 53a:	08 95       	ret
+		else if(pino == 16)
+ 53c:	80 31       	cpi	r24, 0x10	; 16
+ 53e:	91 05       	cpc	r25, r1
+ 540:	21 f4       	brne	.+8      	; 0x54a <__EEPROM_REGION_LENGTH__+0x14a>
+			PORTD |= (1 << PD1);
+ 542:	8b b1       	in	r24, 0x0b	; 11
+ 544:	82 60       	ori	r24, 0x02	; 2
+ 546:	8b b9       	out	0x0b, r24	; 11
+ 548:	08 95       	ret
+		else if(pino == 17)
+ 54a:	81 31       	cpi	r24, 0x11	; 17
+ 54c:	91 05       	cpc	r25, r1
+ 54e:	21 f4       	brne	.+8      	; 0x558 <__EEPROM_REGION_LENGTH__+0x158>
+			PORTD |= (1 << PD2);
+ 550:	8b b1       	in	r24, 0x0b	; 11
+ 552:	84 60       	ori	r24, 0x04	; 4
+ 554:	8b b9       	out	0x0b, r24	; 11
+ 556:	08 95       	ret
+		else if(pino == 18)
+ 558:	82 31       	cpi	r24, 0x12	; 18
+ 55a:	91 05       	cpc	r25, r1
+ 55c:	21 f4       	brne	.+8      	; 0x566 <__EEPROM_REGION_LENGTH__+0x166>
+			PORTD |= (1 << PD3);
+ 55e:	8b b1       	in	r24, 0x0b	; 11
+ 560:	88 60       	ori	r24, 0x08	; 8
+ 562:	8b b9       	out	0x0b, r24	; 11
+ 564:	08 95       	ret
+		else if(pino == 19)
+ 566:	83 31       	cpi	r24, 0x13	; 19
+ 568:	91 05       	cpc	r25, r1
+ 56a:	21 f4       	brne	.+8      	; 0x574 <__EEPROM_REGION_LENGTH__+0x174>
+			PORTD |= (1 << PD4);
+ 56c:	8b b1       	in	r24, 0x0b	; 11
+ 56e:	80 61       	ori	r24, 0x10	; 16
+ 570:	8b b9       	out	0x0b, r24	; 11
+ 572:	08 95       	ret
+		else if(pino == 20)
+ 574:	84 31       	cpi	r24, 0x14	; 20
+ 576:	91 05       	cpc	r25, r1
+ 578:	21 f4       	brne	.+8      	; 0x582 <__EEPROM_REGION_LENGTH__+0x182>
+			PORTD |= (1 << PD5);
+ 57a:	8b b1       	in	r24, 0x0b	; 11
+ 57c:	80 62       	ori	r24, 0x20	; 32
+ 57e:	8b b9       	out	0x0b, r24	; 11
+ 580:	08 95       	ret
+		else if(pino == 21)
+ 582:	85 31       	cpi	r24, 0x15	; 21
+ 584:	91 05       	cpc	r25, r1
+ 586:	21 f4       	brne	.+8      	; 0x590 <__EEPROM_REGION_LENGTH__+0x190>
+			PORTD |= (1 << PD6);
+ 588:	8b b1       	in	r24, 0x0b	; 11
+ 58a:	80 64       	ori	r24, 0x40	; 64
+ 58c:	8b b9       	out	0x0b, r24	; 11
+ 58e:	08 95       	ret
+		else if(pino == 22)
+ 590:	46 97       	sbiw	r24, 0x16	; 22
+ 592:	19 f4       	brne	.+6      	; 0x59a <__EEPROM_REGION_LENGTH__+0x19a>
+			PORTD |= (1 << PD7);
+ 594:	8b b1       	in	r24, 0x0b	; 11
+ 596:	80 68       	ori	r24, 0x80	; 128
+ 598:	8b b9       	out	0x0b, r24	; 11
+ 59a:	08 95       	ret
+
+0000059c <digitalRead>:
+
+}
+
+int digitalRead(int pino){
+
+	if(pino == 0)
+ 59c:	00 97       	sbiw	r24, 0x00	; 0
+ 59e:	29 f4       	brne	.+10     	; 0x5aa <digitalRead+0xe>
+		return (PINB & (1 << PINB0));
+ 5a0:	83 b1       	in	r24, 0x03	; 3
+ 5a2:	28 2f       	mov	r18, r24
+ 5a4:	21 70       	andi	r18, 0x01	; 1
+ 5a6:	30 e0       	ldi	r19, 0x00	; 0
+ 5a8:	9c c0       	rjmp	.+312    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 1)
+ 5aa:	81 30       	cpi	r24, 0x01	; 1
+ 5ac:	91 05       	cpc	r25, r1
+ 5ae:	21 f4       	brne	.+8      	; 0x5b8 <digitalRead+0x1c>
+		return (PINB & (1 << PINB1));
+ 5b0:	23 b1       	in	r18, 0x03	; 3
+ 5b2:	22 70       	andi	r18, 0x02	; 2
+ 5b4:	30 e0       	ldi	r19, 0x00	; 0
+ 5b6:	95 c0       	rjmp	.+298    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 2)
+ 5b8:	82 30       	cpi	r24, 0x02	; 2
+ 5ba:	91 05       	cpc	r25, r1
+ 5bc:	21 f4       	brne	.+8      	; 0x5c6 <digitalRead+0x2a>
+		return (PINB & (1 << PINB2));
+ 5be:	23 b1       	in	r18, 0x03	; 3
+ 5c0:	24 70       	andi	r18, 0x04	; 4
+ 5c2:	30 e0       	ldi	r19, 0x00	; 0
+ 5c4:	8e c0       	rjmp	.+284    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 3)
+ 5c6:	83 30       	cpi	r24, 0x03	; 3
+ 5c8:	91 05       	cpc	r25, r1
+ 5ca:	21 f4       	brne	.+8      	; 0x5d4 <digitalRead+0x38>
+		return (PINB & (1 << PINB3));
+ 5cc:	23 b1       	in	r18, 0x03	; 3
+ 5ce:	28 70       	andi	r18, 0x08	; 8
+ 5d0:	30 e0       	ldi	r19, 0x00	; 0
+ 5d2:	87 c0       	rjmp	.+270    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 4)
+ 5d4:	84 30       	cpi	r24, 0x04	; 4
+ 5d6:	91 05       	cpc	r25, r1
+ 5d8:	21 f4       	brne	.+8      	; 0x5e2 <digitalRead+0x46>
+		return (PINB & (1 << PINB4));
+ 5da:	23 b1       	in	r18, 0x03	; 3
+ 5dc:	20 71       	andi	r18, 0x10	; 16
+ 5de:	30 e0       	ldi	r19, 0x00	; 0
+ 5e0:	80 c0       	rjmp	.+256    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 5)
+ 5e2:	85 30       	cpi	r24, 0x05	; 5
+ 5e4:	91 05       	cpc	r25, r1
+ 5e6:	21 f4       	brne	.+8      	; 0x5f0 <digitalRead+0x54>
+		return (PINB & (1 << PINB5));
+ 5e8:	23 b1       	in	r18, 0x03	; 3
+ 5ea:	20 72       	andi	r18, 0x20	; 32
+ 5ec:	30 e0       	ldi	r19, 0x00	; 0
+ 5ee:	79 c0       	rjmp	.+242    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 6)
+ 5f0:	86 30       	cpi	r24, 0x06	; 6
+ 5f2:	91 05       	cpc	r25, r1
+ 5f4:	21 f4       	brne	.+8      	; 0x5fe <digitalRead+0x62>
+		return (PINB & (1 << PINB6));
+ 5f6:	23 b1       	in	r18, 0x03	; 3
+ 5f8:	20 74       	andi	r18, 0x40	; 64
+ 5fa:	30 e0       	ldi	r19, 0x00	; 0
+ 5fc:	72 c0       	rjmp	.+228    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 7)
+ 5fe:	87 30       	cpi	r24, 0x07	; 7
+ 600:	91 05       	cpc	r25, r1
+ 602:	21 f4       	brne	.+8      	; 0x60c <digitalRead+0x70>
+		return (PINB & (1 << PINB7));
+ 604:	23 b1       	in	r18, 0x03	; 3
+ 606:	20 78       	andi	r18, 0x80	; 128
+ 608:	30 e0       	ldi	r19, 0x00	; 0
+ 60a:	6b c0       	rjmp	.+214    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 8)
+ 60c:	88 30       	cpi	r24, 0x08	; 8
+ 60e:	91 05       	cpc	r25, r1
+ 610:	29 f4       	brne	.+10     	; 0x61c <digitalRead+0x80>
+		return (PINC & (1 << PINC0));
+ 612:	86 b1       	in	r24, 0x06	; 6
+ 614:	28 2f       	mov	r18, r24
+ 616:	21 70       	andi	r18, 0x01	; 1
+ 618:	30 e0       	ldi	r19, 0x00	; 0
+ 61a:	63 c0       	rjmp	.+198    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 9)
+ 61c:	89 30       	cpi	r24, 0x09	; 9
+ 61e:	91 05       	cpc	r25, r1
+ 620:	21 f4       	brne	.+8      	; 0x62a <digitalRead+0x8e>
+		return (PINC & (1 << PINC1));
+ 622:	26 b1       	in	r18, 0x06	; 6
+ 624:	22 70       	andi	r18, 0x02	; 2
+ 626:	30 e0       	ldi	r19, 0x00	; 0
+ 628:	5c c0       	rjmp	.+184    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 10)
+ 62a:	8a 30       	cpi	r24, 0x0A	; 10
+ 62c:	91 05       	cpc	r25, r1
+ 62e:	21 f4       	brne	.+8      	; 0x638 <digitalRead+0x9c>
+		return (PINC & (1 << PINC2));
+ 630:	26 b1       	in	r18, 0x06	; 6
+ 632:	24 70       	andi	r18, 0x04	; 4
+ 634:	30 e0       	ldi	r19, 0x00	; 0
+ 636:	55 c0       	rjmp	.+170    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 11)
+ 638:	8b 30       	cpi	r24, 0x0B	; 11
+ 63a:	91 05       	cpc	r25, r1
+ 63c:	21 f4       	brne	.+8      	; 0x646 <digitalRead+0xaa>
+		return (PINC & (1 << PINC3));
+ 63e:	26 b1       	in	r18, 0x06	; 6
+ 640:	28 70       	andi	r18, 0x08	; 8
+ 642:	30 e0       	ldi	r19, 0x00	; 0
+ 644:	4e c0       	rjmp	.+156    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 12)
+ 646:	8c 30       	cpi	r24, 0x0C	; 12
+ 648:	91 05       	cpc	r25, r1
+ 64a:	21 f4       	brne	.+8      	; 0x654 <digitalRead+0xb8>
+		return (PINC & (1 << PINC4));
+ 64c:	26 b1       	in	r18, 0x06	; 6
+ 64e:	20 71       	andi	r18, 0x10	; 16
+ 650:	30 e0       	ldi	r19, 0x00	; 0
+ 652:	47 c0       	rjmp	.+142    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 13)
+ 654:	8d 30       	cpi	r24, 0x0D	; 13
+ 656:	91 05       	cpc	r25, r1
+ 658:	21 f4       	brne	.+8      	; 0x662 <digitalRead+0xc6>
+		return (PINC & (1 << PINC5));
+ 65a:	26 b1       	in	r18, 0x06	; 6
+ 65c:	20 72       	andi	r18, 0x20	; 32
+ 65e:	30 e0       	ldi	r19, 0x00	; 0
+ 660:	40 c0       	rjmp	.+128    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 14)
+ 662:	8e 30       	cpi	r24, 0x0E	; 14
+ 664:	91 05       	cpc	r25, r1
+ 666:	21 f4       	brne	.+8      	; 0x670 <digitalRead+0xd4>
+		return (PINC & (1 << PINC6));
+ 668:	26 b1       	in	r18, 0x06	; 6
+ 66a:	20 74       	andi	r18, 0x40	; 64
+ 66c:	30 e0       	ldi	r19, 0x00	; 0
+ 66e:	39 c0       	rjmp	.+114    	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 15)
+ 670:	8f 30       	cpi	r24, 0x0F	; 15
+ 672:	91 05       	cpc	r25, r1
+ 674:	29 f4       	brne	.+10     	; 0x680 <digitalRead+0xe4>
+		return (PIND & (1 << PIND0));
+ 676:	89 b1       	in	r24, 0x09	; 9
+ 678:	28 2f       	mov	r18, r24
+ 67a:	21 70       	andi	r18, 0x01	; 1
+ 67c:	30 e0       	ldi	r19, 0x00	; 0
+ 67e:	31 c0       	rjmp	.+98     	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 16)
+ 680:	80 31       	cpi	r24, 0x10	; 16
+ 682:	91 05       	cpc	r25, r1
+ 684:	21 f4       	brne	.+8      	; 0x68e <digitalRead+0xf2>
+		return (PIND & (1 << PIND1));
+ 686:	29 b1       	in	r18, 0x09	; 9
+ 688:	22 70       	andi	r18, 0x02	; 2
+ 68a:	30 e0       	ldi	r19, 0x00	; 0
+ 68c:	2a c0       	rjmp	.+84     	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 17)
+ 68e:	81 31       	cpi	r24, 0x11	; 17
+ 690:	91 05       	cpc	r25, r1
+ 692:	21 f4       	brne	.+8      	; 0x69c <digitalRead+0x100>
+		return (PIND & (1 << PIND2));
+ 694:	29 b1       	in	r18, 0x09	; 9
+ 696:	24 70       	andi	r18, 0x04	; 4
+ 698:	30 e0       	ldi	r19, 0x00	; 0
+ 69a:	23 c0       	rjmp	.+70     	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 18)
+ 69c:	82 31       	cpi	r24, 0x12	; 18
+ 69e:	91 05       	cpc	r25, r1
+ 6a0:	21 f4       	brne	.+8      	; 0x6aa <digitalRead+0x10e>
+		return (PIND & (1 << PIND3));
+ 6a2:	29 b1       	in	r18, 0x09	; 9
+ 6a4:	28 70       	andi	r18, 0x08	; 8
+ 6a6:	30 e0       	ldi	r19, 0x00	; 0
+ 6a8:	1c c0       	rjmp	.+56     	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 19)
+ 6aa:	83 31       	cpi	r24, 0x13	; 19
+ 6ac:	91 05       	cpc	r25, r1
+ 6ae:	21 f4       	brne	.+8      	; 0x6b8 <digitalRead+0x11c>
+		return (PIND & (1 << PIND4));
+ 6b0:	29 b1       	in	r18, 0x09	; 9
+ 6b2:	20 71       	andi	r18, 0x10	; 16
+ 6b4:	30 e0       	ldi	r19, 0x00	; 0
+ 6b6:	15 c0       	rjmp	.+42     	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 20)
+ 6b8:	84 31       	cpi	r24, 0x14	; 20
+ 6ba:	91 05       	cpc	r25, r1
+ 6bc:	21 f4       	brne	.+8      	; 0x6c6 <digitalRead+0x12a>
+		return (PIND & (1 << PIND5));
+ 6be:	29 b1       	in	r18, 0x09	; 9
+ 6c0:	20 72       	andi	r18, 0x20	; 32
+ 6c2:	30 e0       	ldi	r19, 0x00	; 0
+ 6c4:	0e c0       	rjmp	.+28     	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 21)
+ 6c6:	85 31       	cpi	r24, 0x15	; 21
+ 6c8:	91 05       	cpc	r25, r1
+ 6ca:	21 f4       	brne	.+8      	; 0x6d4 <digitalRead+0x138>
+		return (PIND & (1 << PIND6));
+ 6cc:	29 b1       	in	r18, 0x09	; 9
+ 6ce:	20 74       	andi	r18, 0x40	; 64
+ 6d0:	30 e0       	ldi	r19, 0x00	; 0
+ 6d2:	07 c0       	rjmp	.+14     	; 0x6e2 <digitalRead+0x146>
+	else if(pino == 22)
+ 6d4:	46 97       	sbiw	r24, 0x16	; 22
+ 6d6:	21 f4       	brne	.+8      	; 0x6e0 <digitalRead+0x144>
+		return (PIND & (1 << PIND7));
+ 6d8:	29 b1       	in	r18, 0x09	; 9
+ 6da:	20 78       	andi	r18, 0x80	; 128
+ 6dc:	30 e0       	ldi	r19, 0x00	; 0
+ 6de:	01 c0       	rjmp	.+2      	; 0x6e2 <digitalRead+0x146>
+ 6e0:	08 95       	ret
+ 6e2:	82 2f       	mov	r24, r18
+ 6e4:	93 2f       	mov	r25, r19
+ 6e6:	08 95       	ret
+
+000006e8 <main>:
+#include <avr/io.h>
+#include "gpio.h"
+
+int main(void)
+{
+    pinMode(_PC6, INPUT);
+ 6e8:	60 e0       	ldi	r22, 0x00	; 0
+ 6ea:	70 e0       	ldi	r23, 0x00	; 0
+ 6ec:	8e e0       	ldi	r24, 0x0E	; 14
+ 6ee:	90 e0       	ldi	r25, 0x00	; 0
+ 6f0:	0e 94 40 00 	call	0x80	; 0x80 <pinMode>
+    pinMode(_PB5, OUTPUT);
+ 6f4:	61 e0       	ldi	r22, 0x01	; 1
+ 6f6:	70 e0       	ldi	r23, 0x00	; 0
+ 6f8:	85 e0       	ldi	r24, 0x05	; 5
+ 6fa:	90 e0       	ldi	r25, 0x00	; 0
+ 6fc:	0e 94 40 00 	call	0x80	; 0x80 <pinMode>
+    
+	while (1) 
+    {
+		if(digitalRead(_PC6))
+ 700:	8e e0       	ldi	r24, 0x0E	; 14
+ 702:	90 e0       	ldi	r25, 0x00	; 0
+ 704:	0e 94 ce 02 	call	0x59c	; 0x59c <digitalRead>
+ 708:	89 2b       	or	r24, r25
+ 70a:	39 f0       	breq	.+14     	; 0x71a <main+0x32>
+			digitalWrite(_PB5, HIGH);
+ 70c:	61 e0       	ldi	r22, 0x01	; 1
+ 70e:	70 e0       	ldi	r23, 0x00	; 0
+ 710:	85 e0       	ldi	r24, 0x05	; 5
+ 712:	90 e0       	ldi	r25, 0x00	; 0
+ 714:	0e 94 87 01 	call	0x30e	; 0x30e <digitalWrite>
+ 718:	f3 cf       	rjmp	.-26     	; 0x700 <main+0x18>
+		else
+			digitalWrite(_PB5, LOW);		
+ 71a:	60 e0       	ldi	r22, 0x00	; 0
+ 71c:	70 e0       	ldi	r23, 0x00	; 0
+ 71e:	85 e0       	ldi	r24, 0x05	; 5
+ 720:	90 e0       	ldi	r25, 0x00	; 0
+ 722:	0e 94 87 01 	call	0x30e	; 0x30e <digitalWrite>
+ 726:	ec cf       	rjmp	.-40     	; 0x700 <main+0x18>
+
+00000728 <_exit>:
+ 728:	f8 94       	cli
+
+0000072a <__stop_program>:
+ 72a:	ff cf       	rjmp	.-2      	; 0x72a <__stop_program>
