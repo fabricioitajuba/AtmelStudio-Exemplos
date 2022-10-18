@@ -5,7 +5,7 @@
  * Author : Fabrício Ribeiro
  */ 
 
-#define  F_CPU 2000000UL
+#define  F_CPU 8000000UL
 #include <avr/io.h>
 #include <stdio.h>
 #include <util/delay.h>
