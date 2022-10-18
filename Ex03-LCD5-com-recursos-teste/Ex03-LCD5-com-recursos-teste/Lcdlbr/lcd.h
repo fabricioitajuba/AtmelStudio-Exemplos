@@ -44,7 +44,7 @@
  *  @name  Definitions for MCU Clock Frequency
  *  Adapt the MCU clock frequency in Hz to your target. 
  */
-#define XTAL 16000000              /**< clock frequency in Hz, used to calculate delay timer */
+#define XTAL 2000000              /**< clock frequency in Hz, used to calculate delay timer */ //<<<<<------------------------------------ //F_CPU = Fxtal/8 = 16MHz/8 = 2MHz
 
 
 /**
@@ -219,9 +219,6 @@ extern void lcd_gotoxy(uint8_t x, uint8_t y);
  @return   none
 */
 extern void lcd_putc(char c);
-
-//Para ser usada junto com o printf
-extern void lcd_putcc(char c);
 
 
 /**

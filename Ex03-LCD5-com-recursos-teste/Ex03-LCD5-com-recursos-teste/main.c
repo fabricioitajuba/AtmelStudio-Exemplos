@@ -5,9 +5,10 @@
  * Author : Fabrício Ribeiro
  */ 
 
-#define F_CPU 16000000ul
+#define  F_CPU 2000000UL //F_CPU = Fxtal/8 = 16MHz/8 = 2MHz se for usar outro clock, alterar a linha #define XTAL 2000000 em lcd.h
 #include <avr/io.h>
 #include <stdio.h>
+#include <util/delay.h>
 #include "Lcdlbr/lcd.h"
 
 int   outlcd(char c, FILE *stream);
@@ -26,11 +27,20 @@ int main(void)
 	stdout = &mystdout;
 	
 	printf("Hello World!!");
-	printf("\nn=%2.2f", n);
+	lcd_gotoxy(0, 1);
+	printf("n=%2.2f", n);
 
+	_delay_ms(1000);
+
+	lcd_clrscr();
+	
+	printf("teste");
+	lcd_gotoxy(0, 1);
+	printf("display");
+		
 	while(1)
 	{
-		//TODO:: Just sit here forever
+
 	}
 }
 

@@ -475,23 +475,6 @@ void lcd_putc(char c)
 
 }/* lcd_putc */
 
-//Para ser usada junto com o printf
-void lcd_putcc(char c)
-{
-	switch (c)
-	{
-		//case '\f'   :  lcd_send_byte(0,1);
-		//_delay_ms(2);
-		//break;
-		
-		//case '\n'   : lcd_gotoxy(1,2);        break;
-		
-		//case '\b'   : lcd_send_byte(0,0x10);  break;
-		
-		//default     : lcd_putc(c);     break;
-		lcd_putc(c);
-	}
-}
 
 /*************************************************************************
 Display string without auto linefeed 
