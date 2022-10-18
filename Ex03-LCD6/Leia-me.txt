@@ -1,0 +1,12 @@
+Melhor rotina para display LCD!!!
+
+Com alteração da biblioteca usada no exemplo "Ex03-LCD5-com-recursos-teste"
+
+Antes, deve fazer a configuração na IDE utilizando os passos descritos na pasta /Configurações
+
+Para outros valores de clock, modifinar a linha:
+
+#define  F_CPU 2000000UL
+
+em main.c e lcd.h
+
